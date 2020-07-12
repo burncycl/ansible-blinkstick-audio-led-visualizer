@@ -10,7 +10,7 @@ Assuming a virgin Raspberry Pi running Raspios Buster Lite. Boot and run.
 
 #### Raspi-Config (Enable SSH + Localisation options)
 
-*SSH*
+##### SSH
 
 As pi user
 ```
@@ -18,18 +18,23 @@ sudo raspi-config
 ```
 Interfacing Options -> SSH -> Enable "yes"
 
-*Localisation options*
+##### Localisation options
 
-In my case, I'm in the United State. Raspberry Pi defaults to U.K. locale.
+In my case, I'm in the United State. Raspberry Pi defaults to U.K. locale. Obviously, tailor to your region locate.
 
 * Localisation options -> 
 - Change Locale ->  en_US.UTF-8 UTF-8 -> en_US.UTF-8
 - Change Time Zone -> US -> Region (e.g. Mountain) 
 - Change Keyboard Layout -> Generic 101-key PC or Generic 104-key PC (with Windows key) -> Other -> English (US) -> English (US) _top choice_ -> The default for the keyboard layout -> No compose key
 
-*Install Raspberry Pi Prerequisites*
+##### WiFi (optional)
+If you would desire wireless connectivity
+
+Network Options -> Wi-fi -> US United State (or your country) -> SSID (2.4ghz only without dongle) -> Password
+
+##### Install Raspberry Pi Prerequisites
 ```
-apt install -y python3 python3-pip ssh
+sudo apt install -y python3 python3-pip ssh
 ```
 
 On the machine you will be running Ansible from create an SSH Public/Private key pair if you haven't already.
