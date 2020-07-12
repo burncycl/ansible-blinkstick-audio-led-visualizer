@@ -27,7 +27,7 @@
    packages:
     - BlinkStick==1.1.8
     - netifaces==0.10.9
-    - numpy==1.19.0
+    - numpy==1.19.0 # If you're having trouble with these dependencies, you may be running a different OS version.
     - PyAudio==0.2.11
     - pyusb==1.0.0b1
 

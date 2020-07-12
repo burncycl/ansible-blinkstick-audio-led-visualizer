@@ -1,0 +1,7 @@
+---
+
+- name: Reboot node
+  tags: reboot
+  reboot:
+    reboot_timeout: 90 
+

@@ -46,7 +46,7 @@ Do not create with password (unless you like typing the password every time).
 
 Copy the public key
 ```
-cat id_rsa.pub
+cat ~/.ssh/id_rsa.pub
 ```
 
 Back on the Raspberry pi, add the public key to authorized_keys
@@ -61,8 +61,14 @@ Paste the public key you copied from the `cat` earlier command.
 ```
 vi ~/.ssh/authorized_keys
 ```
+### Networking 
+Type the following to grab the ip address of the Raspberry Pi
+```
+ifconfig
+```
+Note the IP address down, as it will be used for Ansible inventory shortly.
 
-### Prerequisites 
+### Ansible Prerequisites 
 
 #### Create ansible-vault secret
 Reference `secrets.yml.example`
@@ -97,9 +103,17 @@ vi Makefile
 
 Modify variables in `./group_vars/all.yml` to your liking. 
 
-Modify `./inventory` to point to the targeted hosts.
+Modify `./inventory` to point to the targeted hosts you noted earlier.
 
 Install (could take a long time on a virgin install).
 ```
 make viz
+```
+
+If you get error, you may need to re-run the automation. For some reason apt packages sometimes borks. If it still fails, on the node manually run
+```
+apt -y update
+apt -y upgrade
+apt -y dist-upgrade
+apt -y autoremove
 ```

@@ -1,7 +1,8 @@
 [transmit_node]
-transmit-node01 ansible_host=10.9.9.175 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
+#transmit-node01 ansible_host=10.9.9.175 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
 
 [receive_nodes]
-#receive-node01 ansible_host=10.9.9.175 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
-#receive-node02 ansible_host=10.9.9.103 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
+receive-node01 ansible_host=10.9.9.175 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
+receive-node02 ansible_host=10.9.9.176 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
+receive-node03 ansible_host=10.9.9.208 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
 
