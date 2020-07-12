@@ -2,6 +2,8 @@
 
 Ansible Automation to automatically provision Raspberry Pi as Blinkstick LED Visualizer devices.
 
+Primary use case is to provision a single transmit node and numerous receive nodes quickly. Although can be used for a default install. The Application repo includes an install script.
+
 ### Raspberry Pi Pre-configuration 
 
 Assuming a virgin Raspberry Pi running Raspios Buster Lite. Boot and run.
