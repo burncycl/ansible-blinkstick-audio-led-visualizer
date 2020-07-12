@@ -1,0 +1,18 @@
+[Unit]
+Description=Blinkstick Audio LED Visualizer
+After=network.target
+
+[Service]
+Type=simple
+User={{ user }}
+WorkingDirectory=/home/{{{ user }}/{{ app_name }}
+ExecStart=/etc/init.d/dnsp start
+PIDFile=/var/run/pdns_recursor.pid
+KillMode=process
+KillSignal=SIGKILL
+Restart=failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+

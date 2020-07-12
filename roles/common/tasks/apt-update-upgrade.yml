@@ -1,0 +1,25 @@
+---
+
+# tasks file for apt-update-upgrade
+
+- name: Update repositories
+  tags: common, apt
+  apt:
+    update_cache: yes
+
+- name: Upgrade all packages to the latest version
+  tags: common, apt
+  apt:
+    upgrade: dist
+
+- name: Remove useless packages from the cache
+  tags: common, apt
+  apt:
+    autoclean: yes
+
+- name: Remove dependencies that are no longer required
+  tags: common, apt
+  apt:
+    autoremove: yes
+
+

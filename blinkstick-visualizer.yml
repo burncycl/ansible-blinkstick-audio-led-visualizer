@@ -1,0 +1,11 @@
+---
+- name: 
+  hosts: primary, secondary 
+  remote_user: pi 
+  become: yes
+  become_method: sudo
+  vars_files:
+   - secrets.yml 
+  roles:
+    - common 
+    - blinkstickviz 

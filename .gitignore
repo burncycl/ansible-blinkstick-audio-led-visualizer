@@ -1,0 +1,3 @@
+*venv
+*.retry
+*roles/blinkstickviz/files/blinkstick-audio-led-visualizer 

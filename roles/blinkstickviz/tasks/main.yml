@@ -1,0 +1,54 @@
+---
+
+- name: Install Apt Package managed dependencies for Blinkstick LED Visualizer. 
+  tags: app, dependencies, apt 
+  apt:
+    name: '{{ packages }}'
+    state: latest
+    update_cache: yes
+  vars:
+   packages:
+    - python3
+    - python3-pip
+    - python3-virtualenv
+    - virtualenv
+    - portaudio19-dev
+    - pulseaudio 
+    - libatlas-base-dev 
+
+
+- name: Install Python3/pip3 dependencies for Blinkstick LED Visualizer.
+  tags: app, dependencies, python 
+  pip:
+    name: "{{ packages }}"
+    state: latest
+    executable: pip3
+  vars:
+   packages:
+    - BlinkStick==1.1.8
+    - netifaces==0.10.9
+    - numpy==1.19.0
+    - PyAudio==0.2.11
+    - pyusb==1.0.0b1
+
+- name: Check '{{ udev_blinkstick_rules_file }}' status, so we can conditionally act
+  tags: app, dependencies, udevadm 
+  stat:
+     path: '{{ udev_blinkstick_rules_file }}'
+  register: udev_rules_file_status
+
+- name: Create '{{ udev_blinkstick_rules_file }}' if it does not exist. 
+  tags: app, dependencies, udevadm 
+  shell: |
+       echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="20a0", ATTR{idProduct}=="41e5", MODE:="0666"' > {{ udev_blinkstick_rules_file }}
+       udevadm trigger
+  when: udev_rules_file_status.stat.exists == false
+
+- name: Git Clone '{{ app_name }}' as '{{ user }}' user. 
+  tags: app, clone 
+  become: true
+  become_user: '{{ user }}'
+  git:
+    repo: '{{ github_app_url }}'
+    dest: '/home/{{ user }}/{{ app_name }}' 
+    update: yes

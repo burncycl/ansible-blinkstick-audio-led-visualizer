@@ -1,0 +1,27 @@
+---
+
+- name: Copy maintenance scripts
+  tags: maintenance_scripts
+  copy:
+    src: "files/sbin/{{ item }}"
+    dest: "{{ usr_sbin }}"
+    owner: root
+    group: root
+    mode: 0775
+  with_items:
+    - update
+    - runclock 
+
+- name: Create cron for runclock 
+  tags: maintenance_scripts, base_cron
+  cron:
+    name: Atomic Clock Sync 
+    minute: "0" 
+    hour: "*/6" 
+    user: root
+    job: "/usr/sbin/runclock >/dev/null 2>&1"
+
+- name: Set timezone to '{{ timezone }}' 
+  tags: timezone
+  timezone:
+    name: '{{ timezone }}' 

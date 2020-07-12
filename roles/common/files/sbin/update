@@ -1,0 +1,12 @@
+#!/bin/bash
+echo This script will update and upgrade everything.
+echo
+#read -p "Press any key to preform apt-get update."
+apt-get -y update
+#read -p "Press any key to preform apt-get upgrade."
+apt-get -y upgrade
+#read -p "Press any key to preform apt-get dist-upgrade."
+apt-get -y dist-upgrade
+#read -p "Press any key to preform apt-get autoremove."
+apt-get -y autoremove
+

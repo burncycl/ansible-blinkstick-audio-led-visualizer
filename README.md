@@ -2,7 +2,7 @@
 
 Ansible Automation to automatically provision Raspberry Pi as Blinkstick LED Visualizer devices.
 
-### Pre-configuration 
+### Raspberry Pi Pre-configuration 
 
 Assuming a virgin Raspberry Pi running Raspios Buster Lite. Boot and run.
 
@@ -24,3 +24,75 @@ In my case, I'm in the United State. Raspberry Pi defaults to U.K. locale.
 - Change Locale ->  en_US.UTF-8 UTF-8 -> en_US.UTF-8
 - Change Time Zone -> US -> Region (e.g. Mountain) 
 - Change Keyboard Layout -> Generic 101-key PC or Generic 104-key PC (with Windows key) -> Other -> English (US) -> English (US) _top choice_ -> The default for the keyboard layout -> No compose key
+
+*Install Raspberry Pi Prerequisites*
+```
+apt install -y python3 python3-pip ssh
+```
+
+On the machine you will be running Ansible from create an SSH Public/Private key pair if you haven't already.
+```
+cd ~/.ssh/
+ssh-keygen -t rsa -b 4096
+```
+Do not create with password (unless you like typing the password every time).
+
+Copy the public key
+```
+cat id_rsa.pub
+```
+
+Back on the Raspberry pi, add the public key to authorized_keys
+```
+mkdir ~/.ssh
+chmod 700 ~/.ssh
+touch ~/.ssh/authorized_keys
+chmod 644 ~/.ssh/authorized_keys
+```
+
+Paste the public key you copied from the `cat` earlier command.
+```
+vi ~/.ssh/authorized_keys
+```
+
+### Prerequisites 
+
+#### Create ansible-vault secret
+Reference `secrets.yml.example`
+```
+cp secrets.yml.example secrets.yml
+```
+Modify the `ansible_sudo_pass` variable if using non-default password.
+```
+vi secrets.yml
+```
+
+Encrypt the file with a password. 
+
+```
+ansible-vault encrypt secrets.yml
+```
+Your other choice is to setup a password file and use that instead, which won't prompt.
+
+Create a password file, so you won't be prompted every time you run Ansible automation.
+```
+sudo mkdir /secrets
+touch /secrets/.vaultpw
+chown -R youruser:youruser /secrets
+chmod -R 600 /secrets
+```
+If you don't like this location, place it elsewhere. But, we be sure to update the Makefile VAULTPW variable with the new location (optional).
+```
+vi Makefile
+```
+
+### Install
+
+Modify variables in `./group_vars/all.yml` to your liking. 
+
+Modify `./inventory` to point to the targeted hosts.
+
+Install (could take a long time on a virgin install).
+```
+make viz
+```
