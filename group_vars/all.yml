@@ -2,10 +2,15 @@
 
 usr_sbin: /usr/sbin
 etc_dir: /etc
-
+python3: /usr/bin/python3
+pulseaudio: /usr/bin/pulseaudio
 timezone: America/Denver
+user: pi # Default user on raspberry pi. Modify if you wish the application to run under a different user account.
 
-# Default user on raspberry pi. Modify if you wish the application to run under a different user account.
-user: pi
+# Transmit mode specific Service vars 
+install_as_startup_service: True # Should the blinkstick audio visualiztion startup as system service?
+input_only_mode: True # Input Only Mode. Assumes Transmit Mode via UDP. Facilitates device that only listens to input without Blinkstick attached and transmits to other devices. 
+visualization_modes: all # Options: all, pulse, blink, loop (List type - Can specify multiple options)
 
-
+# Receive mode specific Service vars
+network_iface: eth0 # Also the default

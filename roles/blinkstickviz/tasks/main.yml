@@ -45,10 +45,31 @@
   when: udev_rules_file_status.stat.exists == false
 
 - name: Git Clone '{{ app_name }}' as '{{ user }}' user. 
-  tags: app, clone 
+  tags: app, git, clone 
   become: true
   become_user: '{{ user }}'
   git:
     repo: '{{ github_app_url }}'
     dest: '/home/{{ user }}/{{ app_name }}' 
     update: yes
+
+- name: Systemd start script for Visualizer
+  tags: app, systemd
+  template:
+      src: 'templates/{{ blinkstickviz_service }}.j2'
+      dest: '{{ systemd_services_dir }}/{{ blinkstickviz_service }}'
+      owner: root
+      group: root
+      mode: 0644
+  when: install_as_startup_service == True
+
+- name: Enable systemd start script for Vizualizer 
+  tags: app, systemd 
+  systemd:
+    name: '{{ blinkstickviz_service }}'
+    daemon_reload: yes
+    state: restarted
+    enabled: yes
+  when: install_as_startup_service == True
+  ignore_errors: yes
+  

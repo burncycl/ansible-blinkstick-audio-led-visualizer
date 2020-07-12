@@ -51,5 +51,5 @@ ansible:
 
 # Surgical # Run against specific tags 
 surgical: 
-	$(ANSIBLE_PLAYBOOK) -i ./inventory $(PLAYBOOK_YML) --tags "python" --vault-password-file $(VAULTPWF)
+	$(ANSIBLE_PLAYBOOK) -i ./inventory $(PLAYBOOK_YML) --tags "git, systemd" --vault-password-file $(VAULTPWF)
 

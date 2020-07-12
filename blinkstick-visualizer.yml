@@ -1,6 +1,6 @@
 ---
 - name: 
-  hosts: primary, secondary 
+  hosts: transmit_node, receive_nodes
   remote_user: pi 
   become: yes
   become_method: sudo

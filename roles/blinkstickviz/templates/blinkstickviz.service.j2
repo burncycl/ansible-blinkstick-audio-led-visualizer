@@ -1,0 +1,24 @@
+#jinja2: trim_blocks:False
+[Unit]
+Description=Blinkstick Audio LED Visualizer
+After=network.target
+
+[Service]
+Type=simple
+User={{ user }}
+Environment=PYTHONUNBUFFERED=TRUE
+WorkingDirectory=/home/{{ user }}/{{ app_name }}
+{%- if inventory_hostname in groups['receive_nodes'] %}
+ExecStart={{ python3 }} visualizer.py --receive --interface {{ network_iface }}
+{% elif inventory_hostname in groups['transmit_node'] %}
+ExecStartPre={{ pulseaudio }} --start --verbose
+ExecStart={{ python3 }} visualizer.py --modes {{ visualization_modes }} --transmit {% if input_only_mode == True %}--inputonly{% else %}{% endif %}
+{%- endif %}
+KillMode=process
+KillSignal=SIGKILL
+Restart=failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+
