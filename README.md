@@ -117,3 +117,7 @@ apt -y upgrade
 apt -y dist-upgrade
 apt -y autoremove
 ```
+Includes startup script, which launches the application at boot (if told to do so - set in `./group_vars/all.yml`). Set,
+```
+install_as_startup_service: True
+```

@@ -16,8 +16,9 @@ ExecStart={{ python3 }} visualizer.py --modes {{ visualization_modes }} --transm
 {%- endif %}
 KillMode=process
 KillSignal=SIGKILL
-Restart=failure
-RestartSec=10
+RemainAfterExit=no
+Restart=on-failure
+RestartSec=1s
 
 [Install]
 WantedBy=multi-user.target
