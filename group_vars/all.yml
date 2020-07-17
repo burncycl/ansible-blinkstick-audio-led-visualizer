@@ -9,7 +9,7 @@ user: pi # Default user on raspberry pi. Modify if you wish the application to r
 
 # Transmit mode specific Service vars 
 install_as_startup_service: True # Should the blinkstick audio visualiztion startup as system service?
-input_only_mode: True # Input Only Mode. Assumes Transmit Mode via UDP. Facilitates device that only listens to input without Blinkstick attached and transmits to other devices. 
+input_only_mode: False # Input Only Mode. Assumes Transmit Mode via UDP. Facilitates device that only listens to input without Blinkstick attached and transmits to other devices. 
 visualization_modes: all # Options: all, pulse, blink, loop (List type - Can specify multiple options)
 
 # Receive mode specific Service vars

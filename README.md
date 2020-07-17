@@ -20,7 +20,9 @@ Interfacing Options -> SSH -> Enable "yes"
 
 ##### Localisation options
 
-In my case, I'm in the United State. Raspberry Pi defaults to U.K. locale. Obviously, tailor to your region locate.
+Be sure to set this up before configuring the Wifi.
+
+In my case, I'm in the United State. Raspberry Pi defaults to U.K. locale. Obviously, tailor to your region locale.
 
 * Localisation options -> 
 - Change Locale ->  en_US.UTF-8 UTF-8 -> en_US.UTF-8
@@ -28,7 +30,7 @@ In my case, I'm in the United State. Raspberry Pi defaults to U.K. locale. Obvio
 - Change Keyboard Layout -> Generic 101-key PC or Generic 104-key PC (with Windows key) -> Other -> English (US) -> English (US) _top choice_ -> The default for the keyboard layout -> No compose key
 
 ##### WiFi (optional)
-If you would desire wireless connectivity
+If you would desire wireless connectivity. Be sure to setup localisation options first (otherwise you may mistype password for wifi).
 
 Network Options -> Wi-fi -> US United State (or your country) -> SSID (2.4ghz only without dongle) -> Password
 
