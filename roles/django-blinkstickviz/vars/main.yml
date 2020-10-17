@@ -1,7 +1,7 @@
 ---
 
 # Application specific vars
-app_name: blinkstick-audio-led-visualizer
+app_name: django-blinkstick-audio-led-visualizer
 github_app_url: 'https://github.com/burncycl/{{ app_name }}.git'
 
 # udevadm vars
