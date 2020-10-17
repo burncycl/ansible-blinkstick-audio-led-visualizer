@@ -1,0 +1,17 @@
+---
+
+# Application specific vars
+app_name: blinkstick-audio-led-visualizer
+github_app_url: 'https://github.com/burncycl/{{ app_name }}.git'
+
+# udevadm vars
+udev_blinkstick_rules_file: /etc/udev/rules.d/85-blinkstick.rules
+
+# Nginx configuration
+nginx_bsvapp_conf: 'bsvapp.conf'
+sites_available: '/etc/nginx/sites-available'
+sites_enabled: '/etc/nginx/sites-enabled'
+
+# Systemd vars
+systemd_services_dir: /etc/systemd/system
+blinkstickviz_service: blinkstickviz.service

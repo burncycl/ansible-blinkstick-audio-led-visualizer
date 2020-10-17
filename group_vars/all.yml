@@ -6,6 +6,7 @@ python3: /usr/bin/python3
 pulseaudio: /usr/bin/pulseaudio
 timezone: America/Denver
 user: pi # Default user on raspberry pi. Modify if you wish the application to run under a different user account.
+group: pi 
 
 # Transmit mode specific Service vars 
 install_as_startup_service: True # Should the blinkstick audio visualiztion startup as system service?

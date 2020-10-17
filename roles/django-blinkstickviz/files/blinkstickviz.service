@@ -1,0 +1,23 @@
+[Unit]
+Description=Blinkstick Audio LED Visualizer and Color Controls
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+Environment=PYTHONUNBUFFERED=TRUE
+WorkingDirectory=/home/pi/django-blinkstick-audio-led-visualizer
+ExecStartPre=/usr/bin/pulseaudio --start --verbose
+ExecStartPre=/bin/bash -c ./boot_workers.sh
+ExecStart=/bin/bash -c ./prod.sh
+ExecStop=/bin/bash -c ./kill_workers.sh
+ExecStop=/usr/bin/pkill pulseaudio
+ExecStop=/usr/local/bin/uwsgi --stop /home/pi/bsv.pid
+KillMode=process
+KillSignal=SIGKILL
+RemainAfterExit=no
+Restart=on-failure
+RestartSec=1s
+
+[Install]
+WantedBy=multi-user.target

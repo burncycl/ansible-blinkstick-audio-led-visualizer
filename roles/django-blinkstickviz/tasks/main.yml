@@ -1,0 +1,122 @@
+---
+
+- name: Install Apt Package managed dependencies for Django LED Control App.
+  tags: django_app, dependencies, apt
+  apt:
+    name: '{{ packages }}'
+    state: latest
+    update_cache: yes
+  vars:
+   packages:
+    - python3
+    - python3-pip
+    - python3-virtualenv
+    - virtualenv
+    - portaudio19-dev
+    - pulseaudio
+    - libatlas-base-dev
+    - nginx 
+    - redis-server 
+
+- name: Install Python3/pip3 dependencies for Django LED Control App. 
+  tags: django_app, dependencies, python
+  pip:
+    name: "{{ packages }}"
+    state: latest
+    executable: pip3
+  vars:
+   packages:
+    - amqp==5.0.1
+    - asgiref==3.2.10
+    - billiard==3.6.3.0
+    - BlinkStick==1.1.8
+    - celery==5.0.0
+    - click==7.1.2
+    - click-didyoumean==0.0.3
+    - click-repl==0.1.6
+    - colour==0.1.5
+    - Django==3.1.1
+    - importlib-metadata==2.0.0
+    - kombu==5.0.2
+    - netifaces==0.10.9
+    - numpy==1.19.0 # If you're having trouble with these dependencies, you may be running a different OS version.
+    - prompt-toolkit==3.0.8
+    - PyAudio==0.2.11
+    - pytz==2020.1
+    - pyusb==1.0.0b1
+    - redis==3.5.3
+    - six==1.15.0
+    - sqlparse==0.3.1
+    - uWSGI==2.0.19.1
+    - vine==5.0.0
+    - wcwidth==0.2.5
+    - webcolors==1.11.1
+    - zipp==3.3.1
+
+- name: Check '{{ udev_blinkstick_rules_file }}' status, so we can conditionally act
+  tags: django_app, dependencies, udevadm
+  stat:
+     path: '{{ udev_blinkstick_rules_file }}'
+  register: udev_rules_file_status
+
+- name: Create '{{ udev_blinkstick_rules_file }}' if it does not exist.
+  tags: django_app, dependencies, udevadm
+  shell: |
+       echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="20a0", ATTR{idProduct}=="41e5", MODE:="0666"' > {{ udev_blinkstick_rules_file }}
+       udevadm trigger
+  when: udev_rules_file_status.stat.exists == false
+
+- name: Git Clone '{{ app_name }}' as '{{ user }}' user.
+  tags: app, git, clone
+  become: true
+  become_user: '{{ user }}'
+  git:
+    repo: '{{ github_app_url }}'
+    dest: '/home/{{ user }}/{{ app_name }}'
+    update: yes
+
+- name: Remove nginx default symlink in sites-enabled
+  tags: django_app, nginx_conf 
+  file:
+   path: '{{ sites_enabled }}/default'
+   state: absent
+
+- name: Copy '{{ nginx_bsvapp_conf }}' Nginx Configuration 
+  tags: django_app, nginx_conf 
+  copy:
+    src: 'files/{{ nginx_bsvapp_conf }}'
+    dest: '{{ sites_available }}/{{ nginx_bsvapp_conf }}'
+    owner: root 
+    group: root 
+    mode: 0644
+  notify: Restart nginx 
+ 
+- name: Create '{{ nginx_bsvapp_conf }}' symlink in sites-enabled 
+  tags: django_app, nginx_conf
+  file:
+    src: '{{ sites_available }}/{{ nginx_bsvapp_conf }}'
+    dest: '{{ sites_enabled }}/{{ nginx_bsvapp_conf }}'
+    state: link 
+    force: yes 
+  notify: Restart nginx 
+ 
+- name: Copy Systemd start script for BSV App 
+  tags: app, systemd
+  copy:
+      src: 'files/{{ blinkstickviz_service }}'
+      dest: '{{ systemd_services_dir }}/{{ blinkstickviz_service }}'
+      owner: root
+      group: root
+      mode: 0644
+  when: install_as_startup_service == True
+
+#- name: Enable systemd start script for Vizualizer
+#  tags: app, systemd
+#  systemd:
+#    name: '{{ blinkstickviz_service }}'
+#    daemon_reload: yes
+#    state: restarted
+#    enabled: yes
+#  when: install_as_startup_service == True
+#  ignore_errors: yes
+

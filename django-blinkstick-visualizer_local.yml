@@ -1,0 +1,11 @@
+---
+- name: 
+  hosts: transmit_node
+  remote_user: pi 
+  become: yes
+  become_method: sudo
+  vars_files:
+   - secrets.yml 
+  roles:
+   #- common 
+    - django-blinkstickviz 

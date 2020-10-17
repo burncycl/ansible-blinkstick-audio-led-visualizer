@@ -35,7 +35,8 @@ endif
 
 # Declare variables, not war.
 ROLES_DIR := ./roles
-PLAYBOOK_YML := blinkstick-visualizer.yml 
+BSV_PLAYBOOK_YML := blinkstick-visualizer.yml 
+BSVAPP_PLAYBOOK_YML := django-blinkstick-visualizer.yml 
 VAULTPWF := /secrets/.vaultpw
 
 # Handle no targets specified.
@@ -44,12 +45,17 @@ all:
 	$(error No Target specified.)
 
 viz: ansible 
+vizapp: bsvapp
 
 # Ansible
-ansible:
-	$(ANSIBLE_PLAYBOOK) -i ./inventory $(PLAYBOOK_YML) --vault-password-file $(VAULTPWF)
+bsv:
+	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSV_PLAYBOOK_YML) --vault-password-file $(VAULTPWF)
+
+bsvapp:
+	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSVAPP_PLAYBOOK_YML) --vault-password-file $(VAULTPWF)
 
 # Surgical # Run against specific tags 
 surgical: 
-	$(ANSIBLE_PLAYBOOK) -i ./inventory $(PLAYBOOK_YML) --tags "git, systemd" --vault-password-file $(VAULTPWF)
+#	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSV_PLAYBOOK_YML) --tags "maintenance_scripts" --vault-password-file $(VAULTPWF)
+	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSVAPP_PLAYBOOK_YML) --tags "nginx_conf" --vault-password-file $(VAULTPWF)
 
