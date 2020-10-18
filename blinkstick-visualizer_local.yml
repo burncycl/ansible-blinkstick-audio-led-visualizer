@@ -1,6 +1,7 @@
 ---
 - name: 
   hosts: transmit_node, receive_nodes
+  connection: local
   remote_user: pi 
   become: yes
   become_method: sudo
