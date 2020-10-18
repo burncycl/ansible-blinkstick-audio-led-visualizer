@@ -49,23 +49,23 @@ all:
 viz: ansible 
 vizapp: bsvapp
 
-# Ansible
+# Ansible # Left vault password file examples in.
 bsv:
 	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSV_PLAYBOOK_YML)
 #	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSV_PLAYBOOK_YML) --vault-password-file $(VAULTPWF)
 
 bsv_local:
-	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSV_LOCAL_PLAYBOOK_YML)
+	$(ANSIBLE_PLAYBOOK) -i ./inventory_local $(BSV_LOCAL_PLAYBOOK_YML)
 
 bsvapp:
-	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSVAPP_LOCAL_PLAYBOOK_YML) --vault-password-file $(VAULTPWF)
-#	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSVAPP_LOCAL_PLAYBOOK_YML) --vault-password-file $(VAULTPWF)
+	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSVAPP_PLAYBOOK_YML)
+#	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSVAPP_PLAYBOOK_YML) --vault-password-file $(VAULTPWF)
 
 bsvapp_local:
-	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSVAPP_LOCAL_PLAYBOOK_YML)
+	$(ANSIBLE_PLAYBOOK) -i ./inventory_local $(BSVAPP_LOCAL_PLAYBOOK_YML)
 
 # Surgical # Run against specific tags 
 surgical: 
-#	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSV_PLAYBOOK_YML) --tags "maintenance_scripts" --vault-password-file $(VAULTPWF)
 	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSVAPP_PLAYBOOK_YML) --tags "nginx_conf" --vault-password-file $(VAULTPWF)
+#	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSV_PLAYBOOK_YML) --tags "maintenance_scripts" --vault-password-file $(VAULTPWF)
 
