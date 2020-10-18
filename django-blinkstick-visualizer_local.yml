@@ -7,5 +7,5 @@
   vars_files:
    - secrets.yml 
   roles:
-   #- common 
+    - common 
     - django-blinkstickviz 

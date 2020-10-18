@@ -37,6 +37,8 @@ endif
 ROLES_DIR := ./roles
 BSV_PLAYBOOK_YML := blinkstick-visualizer.yml 
 BSVAPP_PLAYBOOK_YML := django-blinkstick-visualizer.yml 
+BSV_LOCAL_PLAYBOOK_YML := blinkstick-visualizer_local.yml 
+BSVAPP_LOCAL_PLAYBOOK_YML := django-blinkstick-visualizer_local.yml 
 VAULTPWF := /secrets/.vaultpw
 
 # Handle no targets specified.
@@ -51,8 +53,14 @@ vizapp: bsvapp
 bsv:
 	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSV_PLAYBOOK_YML) --vault-password-file $(VAULTPWF)
 
+bsv_local:
+	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSV_PLAYBOOK_YML) --vault-password-file $(VAULTPWF)
+
 bsvapp:
-	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSVAPP_PLAYBOOK_YML) --vault-password-file $(VAULTPWF)
+	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSVAPP_LOCAL_PLAYBOOK_YML)
+
+bsvapp_local:
+	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSVAPP_LOCAL_PLAYBOOK_YML)
 
 # Surgical # Run against specific tags 
 surgical: 

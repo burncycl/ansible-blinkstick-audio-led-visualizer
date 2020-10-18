@@ -15,7 +15,7 @@
     - portaudio19-dev
     - pulseaudio 
     - libatlas-base-dev 
-
+    - ansible 
 
 - name: Install Python3/pip3 dependencies for Blinkstick LED Visualizer.
   tags: app, dependencies, python 

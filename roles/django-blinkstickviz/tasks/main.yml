@@ -17,6 +17,7 @@
     - libatlas-base-dev
     - nginx 
     - redis-server 
+    - ansible 
 
 - name: Install Python3/pip3 dependencies for Django LED Control App. 
   tags: django_app, dependencies, python
@@ -74,6 +75,7 @@
     repo: '{{ github_app_url }}'
     dest: '/home/{{ user }}/{{ app_name }}'
     update: yes
+    force: yes
 
 - name: Remove nginx default symlink in sites-enabled
   tags: django_app, nginx_conf 
