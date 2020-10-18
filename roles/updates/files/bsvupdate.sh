@@ -22,7 +22,7 @@ stop_services () {
         systemctl stop blinkstickviz
         sleep 1
         killall celery
-        killall pulseuadio
+        killall pulseaudio
         killall uwsgi
 }
 
