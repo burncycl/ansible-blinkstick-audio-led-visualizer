@@ -61,7 +61,7 @@ bsvapp:
 #	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSVAPP_PLAYBOOK_YML) --vault-password-file $(VAULTPWF)
 
 bsvapp_local:
-	sed -i '5i\  connection: local' ./$(BSV_PLAYBOOK_YML) 
+	sed -i '5i\  connection: local' ./$(BSVAPP_PLAYBOOK_YML) 
 	ANSIBLE_HOST_KEY_CHECKING=false $(ANSIBLE_PLAYBOOK) -i ./inventory_local $(BSVAPP_PLAYBOOK_YML)
 
 # Surgical # Run against specific tags 
