@@ -20,10 +20,11 @@ fetch_latest_ansible () {
 stop_services () {
         echo "Stopping blinkstickviz service..."
         systemctl stop blinkstickviz
+        systemctl stop nginx
         sleep 1
-        killall celery
-        killall pulseaudio
-        killall uwsgi
+        killall -9 celery
+        killall -9 pulseaudio
+        killall -9 uwsgi
 }
 
 # Check Network Health
