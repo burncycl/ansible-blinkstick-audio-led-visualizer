@@ -32,7 +32,7 @@ In my case, I'm in the United State. Raspberry Pi defaults to U.K. locale. Obvio
 ##### WiFi (optional)
 If you would desire wireless connectivity. Be sure to setup localisation options first (otherwise you may mistype password for wifi).
 
-Network Options -> Wi-fi -> US United State (or your country) -> SSID (2.4ghz only without dongle) -> Password
+Network Options -> Wireless LAN -> US United State (or your country) -> SSID (2.4ghz only without dongle) -> Password
 
 ##### Install Raspberry Pi Prerequisites
 ```
@@ -51,7 +51,7 @@ Copy the public key
 cat ~/.ssh/id_rsa.pub
 ```
 
-Back on the Raspberry pi, add the public key to authorized_keys
+Back on the Raspberry pi, add the public key to authorized_keys (as pi user)
 ```
 mkdir ~/.ssh
 chmod 700 ~/.ssh
