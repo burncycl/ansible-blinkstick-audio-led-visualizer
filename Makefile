@@ -53,7 +53,7 @@ bsv:
 #	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSV_PLAYBOOK_YML) --vault-password-file $(VAULTPWF)
 
 bsv_local:
-	sed -i '4i\  connection: local' $(BSV_PLAYBOOK_YML) 
+	sed -i '4i\  connection: local' ./$(BSV_PLAYBOOK_YML) 
 	$(ANSIBLE_PLAYBOOK) -i ./inventory_local $(BSV_PLAYBOOK_YML)
 
 bsvapp:
@@ -61,7 +61,7 @@ bsvapp:
 #	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSVAPP_PLAYBOOK_YML) --vault-password-file $(VAULTPWF)
 
 bsvapp_local:
-	sed -i '4i\  connection: local' $(BSV_PLAYBOOK_YML) 
+	sed -i '4i\  connection: local' ./$(BSV_PLAYBOOK_YML) 
 	$(ANSIBLE_PLAYBOOK) -i ./inventory_local $(BSVAPP_PLAYBOOK_YML)
 
 # Surgical # Run against specific tags 
