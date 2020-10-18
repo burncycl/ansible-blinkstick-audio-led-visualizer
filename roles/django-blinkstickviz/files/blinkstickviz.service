@@ -1,5 +1,5 @@
 [Unit]
-Description=Blinkstick Audio LED Visualizer and Color Controls
+Description=Blinkstick Audio LED Visualizer - django_node
 After=network.target
 
 [Service]

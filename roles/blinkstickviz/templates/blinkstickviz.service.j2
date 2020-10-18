@@ -1,6 +1,9 @@
 #jinja2: trim_blocks:False
 [Unit]
-Description=Blinkstick Audio LED Visualizer
+{%- if inventory_hostname in groups['receive_nodes'] %}
+Description=Blinkstick Audio LED Visualizer - receive_node
+{%- elif inventory_hostname in groups['transmit_node'] %}
+Description=Blinkstick Audio LED Visualizer - transmit_node{% else %}{% endif %}
 After=network.target
 
 [Service]
