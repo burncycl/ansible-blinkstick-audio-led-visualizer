@@ -11,10 +11,26 @@ GIT_BASE_URL="https://github.com/burncycl"
 APPS_DIR="/home/pi"
 USER="pi"
 
+# Functions
+fetch_latest_ansible () {
+        cd ${APPS_DIR}
+        rm -rf ./{$BSV_ANSIBLE}
+        su - ${USER} -c git clone ${GIT_BASE_URL}/${BSV_ANSIBLE}.git
+}
+
+stop_services () {
+        echo "Stopping blinkstickviz service..."
+        systemctl stop blinkstickviz
+        sleep 1
+        killall celery
+        killall pulseuadio
+        killall uwsgi
+}
+
 # Check Network Health 
 wget -q --tries=10 --timeout=20 --spider ${GIT_BASE_URL}
 if [[ $? -eq 0 ]]; then
-	echo "Online - Can Update. Contiuning..."
+	echo "Online - Can Update. Continuing..."
 
 	# Determine what type of node we are.
 	IS_RECEIVE=`grep "receive_node" /etc/systemd/system/blinkstickviz.service`
@@ -77,19 +93,3 @@ else
         echo "Offline - Cannot Update. Exiting."
 		exit 0
 fi
-
-
-fetch_latest_ansible () {
-	cd ${APPS_DIR}
-	rm -rf ./{$BSV_ANSIBLE}
-	su - ${USER} -c git clone ${GIT_BASE_URL}/${BSV_ANSIBLE}.git
-} 
-
-stop_services () {
-	echo "Stopping blinkstickviz service..."
-	systemctl stop blinkstickviz
-	sleep 1
-	killall celery
-	killall pulseuadio
-	killall uwsgi
-} 
