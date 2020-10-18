@@ -54,6 +54,7 @@ bsv:
 
 bsv_local:
 	sed -i '5i\  connection: local' ./$(BSV_PLAYBOOK_YML) 
+	sed -i 's/    - reboot//g' ./$(BSVAPP_PLAYBOOK_YML) 
 	ANSIBLE_HOST_KEY_CHECKING=false $(ANSIBLE_PLAYBOOK) -i ./inventory_local $(BSV_PLAYBOOK_YML)
 
 bsvapp:
@@ -62,6 +63,7 @@ bsvapp:
 
 bsvapp_local:
 	sed -i '5i\  connection: local' ./$(BSVAPP_PLAYBOOK_YML) 
+	sed -i 's/    - reboot//g' ./$(BSVAPP_PLAYBOOK_YML) 
 	ANSIBLE_HOST_KEY_CHECKING=false $(ANSIBLE_PLAYBOOK) -i ./inventory_local $(BSVAPP_PLAYBOOK_YML)
 
 # Surgical # Run against specific tags 
