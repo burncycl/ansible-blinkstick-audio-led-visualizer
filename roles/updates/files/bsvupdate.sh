@@ -12,7 +12,7 @@ APPS_DIR="/home/pi"
 USER="pi"
 
 # Functions
-fetch_latest_ansible () {        
+fetch_latest_ansible () {
         rm -rf ${APPS_DIR}/${BSV_ANSIBLE}
         su - ${USER} -c "cd ${APPS_DIR} && git clone ${GIT_BASE_URL}/${BSV_ANSIBLE}.git"
 }
@@ -21,6 +21,7 @@ stop_services () {
         echo "Stopping blinkstickviz service..."
         systemctl stop blinkstickviz
         systemctl stop nginx
+        systemctl stop redis-server
         sleep 1
         killall -9 celery
         killall -9 pulseaudio
@@ -51,7 +52,7 @@ if [[ $? -eq 0 ]]; then
                         fetch_latest_ansible
                         sed -i 's/hosts: transmit_node, receive_nodes/hosts: receive_nodes/g' ${APPS_DIR}/${BSV_ANSIBLE}/blinkstick-visualizer_local.yml # Modify playbook to only target receive node.
                         su - ${USER} -c "cd ${APPS_DIR}/${BSV_ANSIBLE} && /usr/bin/make bsv_local"
-						reboot
+                                                reboot
                 fi
 
         elif [ ${#IS_TRANSMIT} != "0" ]; then
@@ -68,7 +69,7 @@ if [[ $? -eq 0 ]]; then
                         fetch_latest_ansible
                         sed -i 's/hosts: transmit_node, receive_nodes/hosts: transmit_node/g' ${APPS_DIR}/${BSV_ANSIBLE}/blinkstick-visualizer_local.yml # Modify playbook to only target receive node.
                         su - ${USER} -c "cd ${APPS_DIR}/${BSV_ANSIBLE} && /usr/bin/make bsv_local"
-						reboot
+                                                reboot
                 fi
 
         elif [ ${#IS_DJANGO} != "0" ]; then
@@ -84,7 +85,7 @@ if [[ $? -eq 0 ]]; then
                         stop_services
                         fetch_latest_ansible
                         su - ${USER} -c "cd ${APPS_DIR}/${BSV_ANSIBLE} && /usr/bin/make bsvapp_local"
-						reboot
+                                                reboot
                 fi
 
         fi
