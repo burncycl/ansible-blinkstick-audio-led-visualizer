@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 2020/10 BuRnCycL
-# Script Updates Blinkstick Viz Software. Compares Git hashes. Works in conjunction with a cron job.
+# Script Updates Blinkstick Viz Software. Compares Git hashes. Works in conjunction with a cron job and Ansible.
 
 # App Vars
 BSV_SCRIPT="blinkstick-audio-led-visualizer"
@@ -50,6 +50,7 @@ if [[ $? -eq 0 ]]; then
                         fetch_latest_ansible
                         sed -i 's/hosts: transmit_node, receive_nodes/hosts: receive_nodes/g' ${APPS_DIR}/${BSV_ANSIBLE}/blinkstick-visualizer_local.yml # Modify playbook to only target receive node.
                         su - ${USER} -c "cd ${APPS_DIR}/${BSV_ANSIBLE} && /usr/bin/make bsv_local"
+						reboot
                 fi
 
         elif [ ${#IS_TRANSMIT} != "0" ]; then
@@ -66,6 +67,7 @@ if [[ $? -eq 0 ]]; then
                         fetch_latest_ansible
                         sed -i 's/hosts: transmit_node, receive_nodes/hosts: transmit_node/g' ${APPS_DIR}/${BSV_ANSIBLE}/blinkstick-visualizer_local.yml # Modify playbook to only target receive node.
                         su - ${USER} -c "cd ${APPS_DIR}/${BSV_ANSIBLE} && /usr/bin/make bsv_local"
+						reboot
                 fi
 
         elif [ ${#IS_DJANGO} != "0" ]; then
@@ -81,6 +83,7 @@ if [[ $? -eq 0 ]]; then
                         stop_services
                         fetch_latest_ansible
                         su - ${USER} -c "cd ${APPS_DIR}/${BSV_ANSIBLE} && /usr/bin/make bsvapp_local"
+						reboot
                 fi
 
         fi
