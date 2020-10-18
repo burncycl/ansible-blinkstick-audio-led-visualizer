@@ -10,4 +10,5 @@
   roles:
     - common 
     - blinkstickviz 
+    - updates 
     - reboot 

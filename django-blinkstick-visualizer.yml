@@ -10,4 +10,5 @@
   roles:
     - common 
     - django-blinkstickviz 
+    - updates 
     - reboot 

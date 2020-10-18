@@ -1,0 +1,21 @@
+---
+
+- name: Copy '{{ bsv_update_script }}'  
+  tags: update_script 
+  copy:
+      src: 'files/{{ bsv_update_script }}'
+      dest: '{{ usr_sbin }}/{{ bsv_update_script }}'
+      owner: root
+      group: root
+      mode: 0755
+
+- name: Cron - Daily BSV Updates 
+  tags: update_script 
+  cron:
+    name: Daily BSV Updates 
+    hour: '5'
+    minute: '05'
+    weekday: '*'
+    user: root
+    job: '/usr/bin/screen -dmS bsv_updates {{ usr_sbin }}/{{ bsv_update_script }}'
+    state: present      
