@@ -4,7 +4,7 @@
   connection: local
   shell: "ssh-keyscan -H {{ inventory_hostname }} >> ~/.ssh/known_hosts"
 
-- name: 
+- name: Install Blinkstick Vizsualizer 
   hosts: transmit_node, receive_nodes
   remote_user: pi 
   become: yes
