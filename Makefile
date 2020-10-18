@@ -55,7 +55,7 @@ bsv:
 #	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSV_PLAYBOOK_YML) --vault-password-file $(VAULTPWF)
 
 bsv_local:
-	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSV_PLAYBOOK_YML)
+	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSV_LOCAL_PLAYBOOK_YML)
 
 bsvapp:
 	$(ANSIBLE_PLAYBOOK) -i ./inventory $(BSVAPP_LOCAL_PLAYBOOK_YML) --vault-password-file $(VAULTPWF)
