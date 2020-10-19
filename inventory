@@ -1,8 +1,15 @@
 [transmit_node]
-transmit-node01 ansible_host=10.9.9.126 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
+transmit-node01 ansible_host=10.9.9.100 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
+transmit-node02 ansible_host=10.9.9.101 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
+transmit-node03 ansible_host=10.9.9.122 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
+transmit-node04 ansible_host=10.9.9.132 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
 
 [receive_nodes]
-receive-node01 ansible_host=10.9.9.124 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
-receive-node02 ansible_host=10.9.9.123 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
-#receive-node03 ansible_host=10.9.9.107 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
-
+receive-node01 ansible_host=10.9.9.104 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
+receive-node02 ansible_host=10.9.9.105 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
+receive-node03 ansible_host=10.9.9.107 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
+receive-node04 ansible_host=10.9.9.123 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
+receive-node05 ansible_host=10.9.9.124 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
+receive-node06 ansible_host=10.9.9.129 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
+receive-node07 ansible_host=10.9.9.130 ansible_port=22 ansible_python_interpreter=/usr/bin/python3
+receive-node08 ansible_host=10.9.9.131 ansible_port=22 ansible_python_interpreter=/usr/bin/python3

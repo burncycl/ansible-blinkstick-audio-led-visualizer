@@ -1,7 +1,8 @@
 ---
 
 - name: Install Blinkstick Vizsualizer 
-  hosts: transmit_node, receive_nodes
+  #  hosts: transmit_node, receive_nodes # Use only receive nodes if install bsvapp (Django App)
+  hosts: receive_nodes
   remote_user: pi 
   become: yes
   become_method: sudo
@@ -11,4 +12,4 @@
     - common 
     - blinkstickviz 
     - updates 
-    - reboot 
+      #    - reboot 

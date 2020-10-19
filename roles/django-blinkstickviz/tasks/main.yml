@@ -112,13 +112,13 @@
       mode: 0644
   when: install_as_startup_service == True
 
-#- name: Enable systemd start script for Vizualizer
-#  tags: app, systemd
-#  systemd:
-#    name: '{{ blinkstickviz_service }}'
-#    daemon_reload: yes
-#    state: restarted
-#    enabled: yes
-#  when: install_as_startup_service == True
-#  ignore_errors: yes
+- name: Enable systemd start script for Vizualizer
+  tags: app, systemd
+  systemd:
+    name: '{{ blinkstickviz_service }}'
+    daemon_reload: yes
+    state: restarted
+    enabled: yes
+  when: install_as_startup_service == True
+  ignore_errors: yes
 
