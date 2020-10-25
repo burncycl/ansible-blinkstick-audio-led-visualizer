@@ -107,9 +107,14 @@ Modify variables in `./group_vars/all.yml` to your liking.
 
 Modify `./inventory` to point to the targeted hosts you noted earlier.
 
-Install (could take a long time on a virgin install).
+Install blinkstick led visualizer script (could take a long time on a virgin install). Defaults to network mode.
 ```
-make viz
+make bsv 
+```
+
+Install blinkstick LED Control App (same deal, modify inventory prior, as bsvapp targets transmit nodes). Default to network mode.
+```
+make bsvapp
 ```
 
 If you get error, you may need to re-run the automation. For some reason apt packages sometimes borks. If it still fails, on the node manually run
