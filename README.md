@@ -133,3 +133,5 @@ install_as_startup_service: True
 This will install an update cronjob that runs at 5:05AM Mountain, provided an update exists. Mind you the defaults of the code will override any customizations (thus, fork if you want to maintain those customizations).
 
 The update script will determine what type of node it is (transmit, receive, django app) and download the latest Ansible (to insure dependencies are met) and code base.
+
+The method is via Makefile bsv_local (for script only / local install) or bsvapp_local (for django app / local install). Note: Local install modifies the original code base. Thus, a fresh clone is required for non-local installs.
