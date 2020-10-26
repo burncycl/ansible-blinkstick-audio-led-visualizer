@@ -129,3 +129,7 @@ Includes startup script, which launches the application at boot (if told to do s
 install_as_startup_service: True
 ```
 
+### Updates
+This will install an update cronjob that runs at 5:05AM Mountain, provided an update exists. Mind you the defaults of the code will override any customizations (thus, fork if you want to maintain those customizations).
+
+The update script will determine what type of node it is (transmit, receive, django app) and download the latest Ansible (to insure dependencies are met) and code base.
