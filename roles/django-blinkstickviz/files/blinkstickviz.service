@@ -7,7 +7,7 @@ Type=simple
 User=pi
 Environment=PYTHONUNBUFFERED=TRUE
 WorkingDirectory=/home/pi/django-blinkstick-audio-led-visualizer
-ExecStartPre=/bin/bash -c ./pulseaudio.sh
+ExecStartPre=/usr/bin/screen -dmS pulseaudio_watcher ./pulseaudio.sh
 ExecStartPre=/bin/bash -c ./boot_workers.sh
 ExecStart=/bin/bash -c ./prod.sh
 ExecStop=/bin/bash -c ./stop.sh
